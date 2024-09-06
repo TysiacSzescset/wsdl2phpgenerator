@@ -1,10 +1,4 @@
 <?php
-
-/*
- * This file is part of the WSDL2PHPGenerator package.
- * (c) WSDL2PHPGenerator.
- */
-
 namespace Wsdl2PhpGenerator\Filter;
 
 use Wsdl2PhpGenerator\Service;
@@ -19,9 +13,8 @@ interface FilterInterface
     /**
      * Filter a service.
      *
-     * @param Service $service the initial service
-     *
-     * @return Service the altered service
+     * @param Service $service The initial service.
+     * @return Service The altered service.
      */
     public function filter(Service $service);
 }

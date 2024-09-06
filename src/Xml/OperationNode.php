@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This file is part of the WSDL2PHPGenerator package.
- * (c) WSDL2PHPGenerator.
- */
 
 namespace Wsdl2PhpGenerator\Xml;
 
@@ -12,6 +8,7 @@ namespace Wsdl2PhpGenerator\Xml;
  */
 class OperationNode extends DocumentedNode
 {
+
     /**
      * The original version of the operation as returned by the SOAP client.
      *
@@ -33,21 +30,21 @@ class OperationNode extends DocumentedNode
      *
      * They are represented as a string in the format "type1 parameter1, type2 parameter2" etc.
      *
-     * @var string parameter types and names separated by comma "type1 parameter1, type2 parameter2"
+     * @var string Parameter types and names separated by comma "type1 parameter1, type2 parameter2".
      */
     protected $params;
 
     /**
      * The name of the return type value.
      *
-     * @var string the return type
+     * @var string The return type.
      */
     protected $returns;
 
     public function __construct($wsdlFunction)
     {
         $this->wsdlFunction = $wsdlFunction;
-        $matches            = [];
+        $matches = array();
         if (preg_match(
             // Look for definitions in the format:
             // return_type method_name(param_type1 param1, param_type2 param2)
@@ -56,8 +53,8 @@ class OperationNode extends DocumentedNode
             $matches
         )) {
             $this->returns = $matches[1];
-            $this->name    = $matches[2];
-            $this->params  = $matches[3];
+            $this->name = $matches[2];
+            $this->params = $matches[3];
         } elseif (preg_match(
             // @TODO Document when this case is triggered and what the difference is to the case above.
             '/^(list\([\w\$\d,_. ]*\)) (\w[\w\d_]*)\(([\w\$\d,_. ]*)\)$/u',
@@ -65,17 +62,17 @@ class OperationNode extends DocumentedNode
             $matches
         )) {
             $this->returns = $matches[1];
-            $this->name    = $matches[2];
-            $this->params  = $matches[3];
+            $this->name = $matches[2];
+            $this->params = $matches[3];
         }
 
         parent::__construct();
     }
 
     /**
-     * Returns the name of the operation.
+     * Returns the name of the operation
      *
-     * @return string the operation name
+     * @return string The operation name.
      */
     public function getName()
     {
@@ -85,7 +82,7 @@ class OperationNode extends DocumentedNode
     /**
      * Returns a string representing the parameters of the operation.
      *
-     * @return string parameters in the format "type1 param1, typ2 param2"
+     * @return string Parameters in the format "type1 param1, typ2 param2".
      */
     public function getParams()
     {
@@ -95,7 +92,7 @@ class OperationNode extends DocumentedNode
     /**
      * Returns the name of the return type for the operation.
      *
-     * @return string the operation return type
+     * @return string The operation return type.
      */
     public function getReturns()
     {

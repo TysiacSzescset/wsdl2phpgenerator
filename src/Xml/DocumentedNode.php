@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This file is part of the WSDL2PHPGenerator package.
- * (c) WSDL2PHPGenerator.
- */
 
 namespace Wsdl2PhpGenerator\Xml;
 
@@ -12,19 +8,19 @@ namespace Wsdl2PhpGenerator\Xml;
  */
 abstract class DocumentedNode extends XmlNode
 {
+
     /**
      * Retrieves the documentation for the node.
      *
-     * @return string the documentation
+     * @return string The documentation.
      */
     public function getDocumentation()
     {
-        $documentation      = null;
+        $documentation = null;
         $documentationNodes = $this->element->getElementsByTagName('documentation');
         if ($documentationNodes->length > 0) {
             $documentation = $documentationNodes->item(0)->nodeValue;
         }
-
         return $documentation;
     }
 }

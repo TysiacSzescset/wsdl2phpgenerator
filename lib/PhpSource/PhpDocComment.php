@@ -1,94 +1,105 @@
 <?php
-
-/*
- * This file is part of the WSDL2PHPGenerator package.
- * (c) WSDL2PHPGenerator.
+/**
+ * @package phpSource
  */
-
 namespace Wsdl2PhpGenerator\PhpSource;
 
 /**
- * Class that represents the source code for a phpdoc comment in php.
+ * Class that represents the source code for a phpdoc comment in php
  *
+ * @package phpSource
  * @author Fredrik Wallgren <fredrik.wallgren@gmail.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 class PhpDocComment
 {
     /**
+     *
      * @var PhpDocElement A access element
+     * @access private
      */
     private $access;
 
     /**
+     *
      * @var PhpDocElement A var element
+     * @access private
      */
     private $var;
 
     /**
+     *
      * @var array Array of PhpDocElements
+     * @access private
      */
     private $params;
 
     /**
+     *
      * @var PhpDocElement
      */
     private $return;
 
     /**
+     *
      * @var PhpDocElement
      */
     private $package;
 
     /**
+     *
      * @var PhpDocElement
      */
     private $author;
 
     /**
+     *
      * @var PhpDocElement
      */
     private $licence;
 
     /**
+     *
      * @var array Array of PhpDocElements
      */
     private $throws;
 
     /**
+     *
      * @var string A description in the comment
      */
     private $description;
 
     /**
-     * Constructs the object, sets all variables to empty.
+     * Constructs the object, sets all variables to empty
      */
     public function __construct($description = '')
     {
         $this->description = $description;
-        $this->access      = null;
-        $this->var         = null;
-        $this->params      = [];
-        $this->throws      = [];
-        $this->return      = null;
-        $this->author      = null;
-        $this->licence     = null;
-        $this->package     = null;
+        $this->access = null;
+        $this->var = null;
+        $this->params = array();
+        $this->throws = array();
+        $this->return = null;
+        $this->author = null;
+        $this->licence = null;
+        $this->package = null;
     }
 
     /**
-     * Returns the generated source.
+     * Returns the generated source
      *
      * @return string The sourcecoude of the comment
+     * @access public
      */
     public function getSource()
     {
         $description = '';
         if (strlen($this->description) > 0) {
             $preDescription = trim($this->description);
-            $lines          = explode(PHP_EOL, $preDescription);
+            $lines = explode(PHP_EOL, $preDescription);
             foreach ($lines as $line) {
-                $description .= ' '.trim('* '.$line).PHP_EOL;
+                $description .= ' ' . trim('* ' . $line) . PHP_EOL;
             }
         }
 
@@ -120,18 +131,19 @@ class PhpDocComment
         }
 
         if (!empty($description) && !empty($tags)) {
-            $description .= ' *'.PHP_EOL;
+            $description .= ' *' . PHP_EOL;
         }
-        $ret = $description.$tags;
+        $ret = $description . $tags;
 
         if (!empty($ret)) {
-            $ret = PHP_EOL.'/**'.PHP_EOL.$ret.' */'.PHP_EOL;
+            $ret = PHP_EOL . '/**' . PHP_EOL . $ret . ' */' . PHP_EOL;
         }
 
         return $ret;
     }
 
     /**
+     *
      * @param PhpDocElement $access Sets the new access
      */
     public function setAccess(PhpDocElement $access)
@@ -140,6 +152,7 @@ class PhpDocComment
     }
 
     /**
+     *
      * @param PhpDocElement $var Sets the new var
      */
     public function setVar(PhpDocElement $var)
@@ -148,6 +161,7 @@ class PhpDocComment
     }
 
     /**
+     *
      * @param PhpDocElement $package The package element
      */
     public function setPackage(PhpDocElement $package)
@@ -156,6 +170,7 @@ class PhpDocComment
     }
 
     /**
+     *
      * @param PhpDocElement $author The author element
      */
     public function setAuthor(PhpDocElement $author)
@@ -164,6 +179,7 @@ class PhpDocComment
     }
 
     /**
+     *
      * @param PhpDocElement $licence The license elemnt
      */
     public function setLicence(PhpDocElement $licence)
@@ -172,6 +188,7 @@ class PhpDocComment
     }
 
     /**
+     *
      * @param PhpDocElement $return Sets the new return
      */
     public function setReturn(PhpDocElement $return)
@@ -180,6 +197,7 @@ class PhpDocComment
     }
 
     /**
+     *
      * @param PhpDocElement $param Adds a new param
      */
     public function addParam(PhpDocElement $param)
@@ -188,6 +206,7 @@ class PhpDocComment
     }
 
     /**
+     *
      * @param PhpDocElement $throws Adds a new throws
      */
     public function addThrows(PhpDocElement $throws)
@@ -196,7 +215,7 @@ class PhpDocComment
     }
 
     /**
-     * Sets the description.
+     * Sets the description
      *
      * @param string $description
      */

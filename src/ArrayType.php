@@ -1,38 +1,38 @@
 <?php
 
-/*
- * This file is part of the WSDL2PHPGenerator package.
- * (c) WSDL2PHPGenerator.
+/**
+ * @package Generator
  */
-
 namespace Wsdl2PhpGenerator;
 
-use Exception;
+use \Exception;
 use Wsdl2PhpGenerator\PhpSource\PhpDocComment;
 use Wsdl2PhpGenerator\PhpSource\PhpDocElementFactory;
 use Wsdl2PhpGenerator\PhpSource\PhpFunction;
 
 /**
- * ArrayType.
+ * ArrayType
+ *
+ * @package Wsdl2PhpGenerator
  */
 class ArrayType extends ComplexType
 {
     /**
-     * Field with array.
+     * Field with array
      *
      * @var Variable
      */
     protected $field;
 
     /**
-     * Type of array elements.
+     * Type of array elements
      *
      * @var string
      */
     protected $arrayOf;
 
     /**
-     * Implements the loading of the class object.
+     * Implements the loading of the class object
      *
      * @throws Exception if the class is already generated(not null)
      */
@@ -60,13 +60,14 @@ class ArrayType extends ComplexType
             'public',
             'offsetExists',
             $this->buildParametersString(
-                [
-                    'offset' => 'mixed',
-                ],
-                false,
+                array(
+                    'offset' => 'mixed'
+                ),
+                true,
                 false
             ),
-            '  return isset($this->'.$this->field->getName().'[$offset]);',
+            'bool',
+            '  return isset($this->' . $this->field->getName() . '[$offset]);',
             $offsetExistsDock
         );
         $this->class->addFunction($offsetExists);
@@ -79,13 +80,14 @@ class ArrayType extends ComplexType
             'public',
             'offsetGet',
             $this->buildParametersString(
-                [
-                    'offset' => 'mixed',
-                ],
-                false,
+                array(
+                    'offset' => 'mixed'
+                ),
+                true,
                 false
             ),
-            '  return $this->'.$this->field->getName().'[$offset];',
+            'mixed',
+            '  return $this->' . $this->field->getName() . '[$offset];',
             $offsetGetDock
         );
         $this->class->addFunction($offsetGet);
@@ -99,17 +101,19 @@ class ArrayType extends ComplexType
             'public',
             'offsetSet',
             $this->buildParametersString(
-                [
+                array(
                     'offset' => 'mixed',
-                    'value'  => $this->arrayOf,
-                ],
-                false,
+                    // 'value' => $this->arrayOf
+                    'value' => 'mixed'
+                ),
+                true,
                 false
             ),
-            '  if (!isset($offset)) {'.PHP_EOL.
-            '    $this->'.$this->field->getName().'[] = $value;'.PHP_EOL.
-            '  } else {'.PHP_EOL.
-            '    $this->'.$this->field->getName().'[$offset] = $value;'.PHP_EOL.
+            'void',
+            '  if (!isset($offset)) {' . PHP_EOL .
+            '    $this->' . $this->field->getName() . '[] = $value;' . PHP_EOL .
+            '  } else {' . PHP_EOL .
+            '    $this->' . $this->field->getName() . '[$offset] = $value;' . PHP_EOL .
             '  }',
             $offsetSetDock
         );
@@ -123,13 +127,14 @@ class ArrayType extends ComplexType
             'public',
             'offsetUnset',
             $this->buildParametersString(
-                [
+                array(
                     'offset' => 'mixed',
-                ],
-                false,
+                ),
+                true,
                 false
             ),
-            '  unset($this->'.$this->field->getName().'[$offset]);',
+            'void',
+            '  unset($this->' . $this->field->getName() . '[$offset]);',
             $offsetUnsetDock
         );
         $this->class->addFunction($offsetUnset);
@@ -147,27 +152,29 @@ class ArrayType extends ComplexType
             'public',
             'current',
             $this->buildParametersString(
-                [],
-                false,
+                array(),
+                true,
                 false
             ),
-            '  return current($this->'.$this->field->getName().');',
+            'mixed',
+            '  return current($this->' . $this->field->getName() . ');',
             $currentDock
         );
         $this->class->addFunction($current);
 
         $nextDock = new PhpDocComment();
-        $nextDock->setDescription($description.PHP_EOL.'Move forward to next element');
+        $nextDock->setDescription($description . PHP_EOL . 'Move forward to next element');
         $nextDock->setReturn(PhpDocElementFactory::getReturn('void', ''));
         $next = new PhpFunction(
             'public',
             'next',
             $this->buildParametersString(
-                [],
-                false,
+                array(),
+                true,
                 false
             ),
-            '  next($this->'.$this->field->getName().');',
+            'void',
+            '  next($this->' . $this->field->getName() . ');',
             $nextDock
         );
         $this->class->addFunction($next);
@@ -179,11 +186,12 @@ class ArrayType extends ComplexType
             'public',
             'key',
             $this->buildParametersString(
-                [],
-                false,
+                array(),
+                true,
                 false
             ),
-            '  return key($this->'.$this->field->getName().');',
+            'mixed',
+            '  return key($this->' . $this->field->getName() . ');',
             $keyDock
         );
         $this->class->addFunction($key);
@@ -195,27 +203,29 @@ class ArrayType extends ComplexType
             'public',
             'valid',
             $this->buildParametersString(
-                [],
-                false,
+                array(),
+                true,
                 false
             ),
+            'bool',
             '  return $this->key() !== null;',
             $validDock
         );
         $this->class->addFunction($valid);
 
         $rewindDock = new PhpDocComment();
-        $rewindDock->setDescription($description.PHP_EOL.'Rewind the Iterator to the first element');
+        $rewindDock->setDescription($description . PHP_EOL . 'Rewind the Iterator to the first element');
         $rewindDock->setReturn(PhpDocElementFactory::getReturn('void', ''));
         $rewind = new PhpFunction(
             'public',
             'rewind',
             $this->buildParametersString(
-                [],
-                false,
+                array(),
+                true,
                 false
             ),
-            '  reset($this->'.$this->field->getName().');',
+            'void',
+            '  reset($this->' . $this->field->getName() . ');',
             $rewindDock
         );
         $this->class->addFunction($rewind);
@@ -233,11 +243,12 @@ class ArrayType extends ComplexType
             'public',
             'count',
             $this->buildParametersString(
-                [],
-                false,
+                array(),
+                true,
                 false
             ),
-            '  return count($this->'.$this->field->getName().');',
+            'int',
+            '  return count($this->' . $this->field->getName() . ');',
             $countDock
         );
         $this->class->addFunction($count);
@@ -245,8 +256,8 @@ class ArrayType extends ComplexType
 
     protected function implementArrayInterfaces()
     {
-        $members       = array_values($this->members);
-        $this->field   = $members[0];
+        $members = array_values($this->members);
+        $this->field = $members[0];
         $this->arrayOf = substr($this->field->getType(), 0, -2);
 
         $this->implementArrayAccess();

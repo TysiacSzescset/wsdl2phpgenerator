@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This file is part of the WSDL2PHPGenerator package.
- * (c) WSDL2PHPGenerator.
- */
 
 namespace Wsdl2PhpGenerator;
 
@@ -12,30 +8,31 @@ namespace Wsdl2PhpGenerator;
  */
 class StreamContextFactory
 {
+
     /**
      * Creates a stream context based on the provided configuration.
      *
-     * @param ConfigInterface $config the configuration
+     * @param ConfigInterface $config The configuration.
      *
-     * @return resource a stream context based on the provided configuration
+     * @return resource A stream context based on the provided configuration.
      */
     public function create(ConfigInterface $config)
     {
-        $options = [];
-        $headers = [];
+        $options = array();
+        $headers = array();
 
         $proxy = $config->get('proxy');
         if (is_array($proxy)) {
-            $options = [
-                'http' => [
-                    'proxy' => $proxy['proxy_host'].':'.$proxy['proxy_port'],
-                ],
-            ];
+            $options = array(
+                'http' => array(
+                    'proxy' => $proxy['proxy_host'] . ':' . $proxy['proxy_port']
+                )
+            );
             if (isset($proxy['proxy_login']) && isset($proxy['proxy_password'])) {
                 // Support for proxy authentication is untested. The current implementation is based on
                 // http://php.net/manual/en/function.stream-context-create.php#74431.
-                $headers[] = 'Proxy-Authorization: Basic '.
-                    base64_encode($proxy['proxy_login'].':'.$proxy['proxy_password']);
+                $headers[] = 'Proxy-Authorization: Basic ' .
+                    base64_encode($proxy['proxy_login'] . ':' . $proxy['proxy_password']);
             }
         }
 
@@ -45,8 +42,8 @@ class StreamContextFactory
             isset($soapOptions['login']) &&
             isset($soapOptions['password'])
         ) {
-            $headers[] = 'Authorization: Basic '.
-                base64_encode($soapOptions['login'].':'.$soapOptions['password']);
+            $headers[] = 'Authorization: Basic ' .
+                base64_encode($soapOptions['login'] . ':' . $soapOptions['password']);
         }
 
         if (count($headers) > 0) {

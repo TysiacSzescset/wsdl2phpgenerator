@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This file is part of the WSDL2PHPGenerator package.
- * (c) WSDL2PHPGenerator.
- */
 
 namespace Wsdl2PhpGenerator\Xml;
 
@@ -12,10 +8,11 @@ namespace Wsdl2PhpGenerator\Xml;
  */
 class ServiceNode extends DocumentedNode
 {
+
     /**
      * Returns the name of the service.
      *
-     * @return string the service name
+     * @return string The service name.
      */
     public function getName()
     {
