@@ -149,11 +149,11 @@ class PhpClass extends PhpElement
 
         $ret .= 'class ' . $this->identifier;
 
-        if (strlen($this->extends) > 0) {
+        if (\strlen($this->extends ?? '') > 0) {
             $ret .= ' extends ' . $this->extends;
         }
 
-        if (count($this->implements??[]) > 0) {
+        if (\count($this->implements??[]) > 0) {
             $ret .= ' implements ' . implode(', ', $this->implements);
         }
 
@@ -163,7 +163,7 @@ class PhpClass extends PhpElement
             $ret .= $this->getIndentionStr() . 'const __default = ' . $this->default . ';' . PHP_EOL;
         }
 
-        if (count($this->constants) > 0) {
+        if (\count($this->constants) > 0) {
             foreach ($this->constants as $name => $value) {
                 $ret .= $this->getIndentionStr() . 'const ' . $name . ' = \'' . $value . '\';' . PHP_EOL;
             }
@@ -234,12 +234,12 @@ class PhpClass extends PhpElement
      */
     public function addConstant($value, $name = '')
     {
-        if (strlen($value) == 0) {
+        if (\strlen($value) == 0) {
             throw new Exception('No value supplied');
         }
 
         // If no name is supplied use the value as name
-        if (strlen($name) == 0) {
+        if (\strlen($name) == 0) {
             if (is_string($value)) {
                 $name = $value;
             } else {
