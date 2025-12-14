@@ -100,7 +100,7 @@ class PhpClass extends PhpElement
      * @param bool $final
      * @param bool $abstract
      */
-    public function __construct($identifier, $classExists = false, $extends = '', PhpDocComment $comment = null, $final = false, $abstract = false)
+    public function __construct($identifier, $classExists = false, $extends = '', ?PhpDocComment $comment = null, $final = false, $abstract = false)
     {
         $this->dependencies = array();
         $this->classExists = $classExists;

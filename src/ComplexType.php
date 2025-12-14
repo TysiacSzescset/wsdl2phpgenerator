@@ -287,7 +287,7 @@ class ComplexType extends Type
         foreach ($parameters as $name => $type) {
             $parameterString = '$' . $name;
             if (!empty($type) && $includeType) {
-                $parameterString = $type . ' ' . $parameterString;
+                $parameterString = ($defaultNull ? '?' : '') . $type . ' ' . $parameterString;
             }
             if ($defaultNull) {
                 $parameterString .= ' = null';

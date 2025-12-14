@@ -91,7 +91,7 @@ class Config implements ConfigInterface
                 // return call_user_func_array($callable, func_get_args());
                 list($object, $method) = $callable;
                 $normalizer = new \ReflectionMethod(get_class($object), $method);
-                $normalizer->setAccessible(true);
+                //$normalizer->setAccessible(true);
                 return $normalizer->invokeArgs($object, func_get_args());
             };
         }, $normalizers);

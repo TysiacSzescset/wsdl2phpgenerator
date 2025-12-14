@@ -126,7 +126,7 @@ class Validator
                 // Use reflection to get access to private isKeyword method.
                 // @todo Remove this when we stop supporting PHP 5.3.
                 $isKeywordMethod = new \ReflectionMethod(__CLASS__, 'isKeyword');
-                $isKeywordMethod->setAccessible(true);
+                //$isKeywordMethod->setAccessible(true);
                 $isKeyword = $isKeywordMethod->invoke(null, $name);
              return !$isKeyword &&
                 !interface_exists($prefix . $name) &&

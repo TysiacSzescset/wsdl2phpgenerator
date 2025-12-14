@@ -34,7 +34,7 @@ class PhpVariable extends PhpElement
      * @param string $initialization The value to set the variable at initialization
      * @param PhpDocComment $comment
      */
-    public function __construct($access, $identifier, $initialization = '', PhpDocComment $comment = null)
+    public function __construct($access, $identifier, $initialization = '', ?PhpDocComment $comment = null)
     {
         $this->comment = $comment;
         $this->access = $access;

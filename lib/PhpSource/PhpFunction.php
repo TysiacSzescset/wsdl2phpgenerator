@@ -50,7 +50,7 @@ class PhpFunction extends PhpElement
      * @param string $source
      * @param PhpDocComment $comment
      */
-    public function __construct($access, $identifier, $params, $return, $source, PhpDocComment $comment = null)
+    public function __construct($access, $identifier, $params, $return, $source, ?PhpDocComment $comment = null)
     {
         $this->access = $access;
         $this->identifier = $identifier;
